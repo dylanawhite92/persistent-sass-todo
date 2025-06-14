@@ -1,8 +1,7 @@
 import ToDoList from './todolist';
 import ToDoItem from './todoitem';
-import ToDoList from './todolist';
 
-const ToDoList = new ToDoList();
+const toDoList = new ToDoList();
 
 // Launch app
 document.addEventListener('readystatechange', (e) => {
@@ -23,7 +22,7 @@ const initApp = () => {
 // Execute helper functions on page refresh
 const refreshThePage = () => {
   clearListDisplay();
-  // renderList();
+  renderList();
   // clearItemEntryField();
   // setFocusOnItemEntryField();
 };
@@ -42,4 +41,37 @@ const deleteContents = (parentElement) => {
     parentElement.removeChild(child);
     child = parentElement.lastElementChild;
   }
+};
+
+// Render list of entered items
+const renderList = () => {
+  const list = toDoList.getList();
+
+  list.forEach((item) => {
+    buildListItem(item);
+  });
+};
+
+// Build DOM elements based off of list array
+const buildListItem = (item) => {
+  const div = document.createElement('div');
+  div.className = 'item';
+
+  const check = document.createElement('input');
+  check.type = 'checkbox';
+  check.id = item.getId();
+  check.tabIndex = 0;
+
+  // Coming back to helper function
+  // addClickListenerToCheckbox(check);
+
+  const label = document.createElement('label');
+  label.htmlFor = item.getId();
+  label.textContent = item.getItem();
+
+  div.appendChild(check);
+  div.appendChild(label);
+
+  const container = document.getElementById('listItems');
+  container.appendChild(div);
 };
