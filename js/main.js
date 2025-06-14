@@ -105,6 +105,7 @@ const processSubmission = () => {
   if (!newEntryText.length) return;
 
   const nextItemId = calcNextItemId();
+  const toDoItem = createNewItem(nextItemId, newEntryText);
 };
 
 const getNewEntry = () => {
@@ -119,5 +120,7 @@ const calcNextItemId = () => {
     nextItemId = list[list.length - 1].getId() + 1;
   }
 
-  return nextItemId; // I'm at 1:23:52 now
+  return nextItemId;
 };
+
+const createNewItem = (itemId, itemText) => {};
