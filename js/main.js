@@ -62,8 +62,7 @@ const buildListItem = (item) => {
   check.id = item.getId();
   check.tabIndex = 0;
 
-  // Coming back to helper function
-  // addClickListenerToCheckbox(check);
+  addClickListenerToCheckbox(check);
 
   const label = document.createElement('label');
   label.htmlFor = item.getId();
@@ -74,4 +73,14 @@ const buildListItem = (item) => {
 
   const container = document.getElementById('listItems');
   container.appendChild(div);
+};
+
+const addClickListenerToCheckbox = (checkbox) => {
+  checkbox.addEventListener('click', (e) => {
+    toDoList.removeItemFromList(checkbox.id);
+    // TODO: remove from persistent data
+    setTimeout(() => {
+      refreshThePage();
+    }, 1000);
+  });
 };
