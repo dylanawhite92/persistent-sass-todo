@@ -12,6 +12,11 @@ document.addEventListener('readystatechange', (e) => {
 
 const initApp = () => {
   // Add listeners
+  const itemEntryForm = document.getElementById('itemEntryForm');
+  itemEntryForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    processSubmission();
+  });
 
   // Procedural
   // Load list object
@@ -23,8 +28,8 @@ const initApp = () => {
 const refreshThePage = () => {
   clearListDisplay();
   renderList();
-  // clearItemEntryField();
-  // setFocusOnItemEntryField();
+  clearItemEntryField();
+  setFocusOnItemEntryField();
 };
 
 // Clear items from container of list items
@@ -83,4 +88,16 @@ const addClickListenerToCheckbox = (checkbox) => {
       refreshThePage();
     }, 1000);
   });
+};
+
+const clearItemEntryField = () => {
+  document.getElementById('newItem').value = '';
+};
+
+const setFocusOnItemEntryField = () => {
+  document.getElementById('newItem').focus();
+};
+
+const processSubmission = () => {
+  // next
 };
