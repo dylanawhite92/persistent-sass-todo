@@ -1,5 +1,5 @@
-import ToDoList from './todolist';
-import ToDoItem from './todoitem';
+import ToDoList from './todolist.js';
+import ToDoItem from './todoitem.js';
 
 const toDoList = new ToDoList();
 
@@ -99,5 +99,25 @@ const setFocusOnItemEntryField = () => {
 };
 
 const processSubmission = () => {
-  // next
+  const newEntryText = getNewEntry();
+
+  // If field is cleared, end
+  if (!newEntryText.length) return;
+
+  const nextItemId = calcNextItemId();
+};
+
+const getNewEntry = () => {
+  return document.getElementById('newItem').value.trim();
+};
+
+const calcNextItemId = () => {
+  let nextItemId = 1;
+  const list = toDoList.getList();
+
+  if (list.length > 0) {
+    nextItemId = list[list.length - 1].getId() + 1;
+  }
+
+  return nextItemId; // I'm at 1:23:52 now
 };
