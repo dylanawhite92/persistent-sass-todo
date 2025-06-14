@@ -20,9 +20,26 @@ const initApp = () => {
   refreshThePage();
 };
 
+// Execute helper functions on page refresh
 const refreshThePage = () => {
   clearListDisplay();
   // renderList();
   // clearItemEntryField();
   // setFocusOnItemEntryField();
+};
+
+// Clear items from container of list items
+const clearListDisplay = () => {
+  const parentElement = document.getElementById('listItems');
+  deleteContents(parentElement);
+};
+
+// Clear until empty
+const deleteContents = (parentElement) => {
+  let child = parentElement.lastElementChild;
+
+  while (child) {
+    parentElement.removeChild(child);
+    child = parentElement.lastElementChild;
+  }
 };
