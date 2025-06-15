@@ -112,13 +112,21 @@ const buildListItem = (item) => {
 
 const addClickListenerToCheckbox = (checkbox) => {
   checkbox.addEventListener('click', (e) => {
+    const removedText = getLabelText(checkbox.id);
+
     toDoList.removeItemFromList(checkbox.id);
     updatePersistentData(toDoList.getList());
+    updateScreenReaderConfirmation(removedText, 'removed from list');
 
     setTimeout(() => {
       refreshThePage();
     }, 1000);
   });
+};
+
+// Get text for screen reader update on removal
+const getLabelText = (checkboxId) => {
+  return document.getElementById(checkboxId).nextElementSibling.textContent;
 };
 
 const updatePersistentData = (listArray) => {
@@ -144,6 +152,7 @@ const processSubmission = () => {
 
   toDoList.addItemToList(toDoItem);
   updatePersistentData(toDoList.getList());
+  updateScreenReaderConfirmation(newEntryText, 'added');
 
   refreshThePage();
 };
@@ -169,4 +178,11 @@ const createNewItem = (itemId, itemText) => {
   toDo.setItem(itemText);
 
   return toDo;
+};
+
+// Correctly signal screen reader with addition or removal of to do
+const updateScreenReaderConfirmation = (newEntryText, actionVerb) => {
+  document.getElementById(
+    'confirmation'
+  ).textContent = `${newEntryText} ${actionVerb}`;
 };
