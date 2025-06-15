@@ -106,6 +106,10 @@ const processSubmission = () => {
 
   const nextItemId = calcNextItemId();
   const toDoItem = createNewItem(nextItemId, newEntryText);
+  toDoList.addItemToList(toDoItem);
+  // Update persistent data
+
+  refreshThePage();
 };
 
 const getNewEntry = () => {
@@ -123,4 +127,10 @@ const calcNextItemId = () => {
   return nextItemId;
 };
 
-const createNewItem = (itemId, itemText) => {};
+const createNewItem = (itemId, itemText) => {
+  const toDo = new ToDoItem();
+  toDo.setId(itemId);
+  toDo.setItem(itemText);
+
+  return toDo;
+};
