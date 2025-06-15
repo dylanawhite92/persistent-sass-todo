@@ -36,10 +36,22 @@ const initApp = () => {
     }
   });
 
-  // Procedural
-  // Load list object
-
+  loadListObject();
   refreshThePage();
+};
+
+// Load list object from local storage
+const loadListObject = () => {
+  const storedList = localStorage.getItem('myToDoList');
+  // If unexpected error, abort
+  if (typeof storedList !== 'string') return;
+  const parsedList = JSON.parse(storedList);
+
+  parsedList.forEach((itemObj) => {
+    const newToDoItem = createNewItem(itemObj._id, itemObj._item);
+
+    toDoList.addItemToList(newToDoItem);
+  });
 };
 
 // Execute helper functions on page refresh
